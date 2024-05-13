@@ -1,11 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
+
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    "inter-regular": Inter_400Regular,
+    "inter-bold": Inter_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator />;
+  }
+
   return (
     <View style={styles.container}>
-      {/* <Text>Open up App.js to start working on your app!</Text> */}
-      <Text>My New App</Text>
+      <Text style={{ fontFamily: "inter-regular" }}>My New App</Text>
+      <Text style={{ fontFamily: "inter-bold" }}>My New App</Text>
       <StatusBar style="auto" />
     </View>
   );
