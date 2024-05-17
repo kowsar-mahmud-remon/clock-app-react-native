@@ -149,11 +149,11 @@
 
 
 
-////////////////////Navbar/////////////
+////////////////////Stack Navigation/////////////
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 
 function HomeScreen({ navigation }) {
@@ -185,15 +185,49 @@ function DetailsScreen({ navigation, route }) {
 const Stack = createNativeStackNavigator();
 
 
+const Logo = () => {
+  return (
+    <Image source={require("./assets/favicon.png")} />
+  );
+};
+
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "orange",
+          },
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 30
+          }
+        }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Detail" component={DetailsScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          name="Detail"
+          component={DetailsScreen}
+          options={{
+            title: "Detail Page",
+            // headerTitle: () => <Logo />,
+            headerStyle: {
+              backgroundColor: "blue",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 30
+            }
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
